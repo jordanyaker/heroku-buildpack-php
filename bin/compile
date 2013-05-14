@@ -9,6 +9,7 @@ APACHE_VERSION="2.2.22"
 APACHE_PATH="apache"
 PHP_VERSION="5.3.10"
 PHP_PATH="php"
+MYSQL_PATH="/etc/mysql"
 
 BIN_DIR=$(dirname $0)
 BUILD_DIR=$1
@@ -43,6 +44,7 @@ curl --silent --max-time 60 --location $PHP_URL | tar xz
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
 cp $LP_DIR/conf/php.ini php
+cp $LP_DIR/conf/custom.cnf $MYSQL_PATH/conf.d
 
 # make php available on bin
 mkdir -p bin
