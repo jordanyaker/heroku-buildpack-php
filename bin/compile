@@ -51,11 +51,12 @@ cp $LP_DIR/conf/custom.cnf .my.cnf
 # make php available on bin
 mkdir -p bin
 ln -s /app/php/bin/php bin/php
+ln -s /app/php/bin/pear bin/pear
 
 # install extra PEAR packages.
 echo "-----> Installing PEAR Packages"
-exec /app/php/bin/pear install Mail
-exec /app/php/bin/pear install Net_SMTP
+exec bin/pear install Mail
+exec bin/pear install Net_SMTP
 
 cat >>boot.sh <<EOF
 for var in \`env|cut -f1 -d=\`; do
