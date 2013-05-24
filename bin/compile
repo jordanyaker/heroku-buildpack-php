@@ -43,10 +43,6 @@ PHP_URL="http://static.americastestkitchenfeed.com.s3.amazonaws.com/v2-php-5.3.1
 echo "-----> Bundling PHP v$PHP_VERSION"
 curl --silent --max-time 60 --location $PHP_URL | tar xz
 
-# install extra PEAR packages.
-/app/php/bin/pear install Mail
-/app/php/bin/pear install Net_SMTP
-
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
 cp $LP_DIR/conf/php.ini php
@@ -55,6 +51,10 @@ cp $LP_DIR/conf/custom.cnf .my.cnf
 # make php available on bin
 mkdir -p bin
 ln -s /app/php/bin/php bin/php
+
+# install extra PEAR packages.
+exec /app/php/bin/pear install Mail
+exec /app/php/bin/pear install Net_SMTP
 
 cat >>boot.sh <<EOF
 for var in \`env|cut -f1 -d=\`; do
