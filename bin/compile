@@ -35,10 +35,18 @@ APACHE_URL="http://static.americastestkitchenfeed.com.s3.amazonaws.com/v2-apache
 echo "-----> Bundling Apache v$APACHE_VERSION"
 curl --silent --max-time 60 --location $APACHE_URL | tar xz
 
+# make it a little leaner
+rm -rf /app/apache/manual/
+
 # install php if needed
 PHP_URL="http://static.americastestkitchenfeed.com.s3.amazonaws.com/v2-php-5.3.10.tar.gz"
 echo "-----> Bundling PHP v$PHP_VERSION"
 curl --silent --max-time 60 --location $PHP_URL | tar xz
+
+# install extra PEAR packages.
+/app/php/bin/pear config-set php_dir /app/php
+/app/php/bin/pear install Mail
+/app/php/bin/pear install Net_SMTP
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
