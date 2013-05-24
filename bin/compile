@@ -53,6 +53,7 @@ mkdir -p bin
 ln -s /app/php/bin/php bin/php
 
 # install extra PEAR packages.
+echo "-----> Installing PEAR Packages"
 exec /app/php/bin/pear install Mail
 exec /app/php/bin/pear install Net_SMTP
 
