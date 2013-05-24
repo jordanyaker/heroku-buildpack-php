@@ -44,7 +44,6 @@ echo "-----> Bundling PHP v$PHP_VERSION"
 curl --silent --max-time 60 --location $PHP_URL | tar xz
 
 # install extra PEAR packages.
-/app/php/bin/pear config-set php_dir /app/php
 /app/php/bin/pear install Mail
 /app/php/bin/pear install Net_SMTP
 
